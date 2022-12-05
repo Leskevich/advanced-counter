@@ -1,0 +1,39 @@
+.Container,
+.StartValue,
+.StartValue input,
+.Container_Button,
+.Container button{
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.Container {
+    width: 330px;
+    margin: 15px;
+    padding: 20px;
+}
+
+.StartValue {
+    width: 100%;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.StartValue input {
+    margin: 10px 0 10px 20px;
+    padding: 5px;
+}
+
+.Container_Button {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.Container button {
+    background-color: darkgrey;
+    width: 100px;
+    padding: 8px;
+
+}
