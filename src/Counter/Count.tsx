@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Count.module.css'
 
 type CountType = {
-    error:string
+    error: string
     count: number
     minCount: number
     maxCount: number
@@ -10,22 +10,23 @@ type CountType = {
     resCount: () => void
 }
 
-export const Count = ({count, minCount, maxCount,error, ...props}: CountType) => {
+export const Count = ({count, minCount, maxCount, error, ...props}: CountType) => {
     const incCount = () => {
         props.incCount()
     }
     const resCount = () => {
         props.resCount()
     }
-    // const disableSet=count===maxCount
+    const disableInc = count >= maxCount || !!error
+    const disableRes = count === minCount || !!error
     return (
         <div className={s.Container}>
             <div className={s.Count}>
-                {minCount === maxCount ? 'Ты дебил?' : count}
+                {error ? error : count}
             </div>
             <div className={s.Button_Container}>
-                <button disabled={!!error} onClick={incCount}>inc</button>
-                <button disabled={count === minCount} onClick={resCount}>reset</button>
+                <button disabled={disableInc} onClick={incCount}>inc</button>
+                <button disabled={disableRes} onClick={resCount}>reset</button>
             </div>
         </div>
     );

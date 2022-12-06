@@ -2,18 +2,22 @@ import React, {ChangeEvent} from 'react';
 import s from './StartCount.module.css'
 
 type StartType = {
-    minCount:number
-    maxCount:number
-    setMin:(e:ChangeEvent<HTMLInputElement>)=>void
-    setMax:(e:ChangeEvent<HTMLInputElement>)=>void
+    disable: boolean
+    error: string
+    minCount: number
+    maxCount: number
+    setMin: (e: ChangeEvent<HTMLInputElement>) => void
+    setMax: (e: ChangeEvent<HTMLInputElement>) => void
+    setCountButton: () => void
 }
-export const StartCount = ({minCount,maxCount,...props}:StartType) => {
-    const setMin = (e:ChangeEvent<HTMLInputElement>) => {
-      props.setMin(e)
+export const StartCount = ({disable, minCount, maxCount, error, ...props}: StartType) => {
+    const setMin = (e: ChangeEvent<HTMLInputElement>) => {
+        props.setMin(e)
     }
-    const setMax = (e:ChangeEvent<HTMLInputElement>) => {
-      props.setMax(e)
+    const setMax = (e: ChangeEvent<HTMLInputElement>) => {
+        props.setMax(e)
     }
+    const disableButton = maxCount <= minCount || disable
 
     return (
         <div className={s.Container}>
@@ -28,13 +32,17 @@ export const StartCount = ({minCount,maxCount,...props}:StartType) => {
                 <div>
                     min value:
                     <input
-                    value={minCount}
-                    onChange={setMin}
+                        value={minCount}
+                        onChange={setMin}
                     />
                 </div>
             </div>
             <div className={s.Container_Button}>
-                <button >set</button>
+                <button disabled={disableButton}
+                        onClick={props.setCountButton}
+                >
+                    set
+                </button>
             </div>
         </div>
     );

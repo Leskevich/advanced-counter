@@ -8,6 +8,8 @@ function App() {
     const [maxCount, setMaxCount] = useState<number>(0)
     const [count, setCount] = useState<number>(minCount)
     const [error, setError] = useState<string>('')
+    const [disable, setDisable] = useState<boolean>(false)
+
 
     const incCount = () => {
         setCount(count + 1)
@@ -16,11 +18,19 @@ function App() {
         setCount(minCount)
     }
     const setMin = (e: ChangeEvent<HTMLInputElement>) => {
+        setError(minCount < 0 || minCount >= maxCount ? 'Нажмите set' : 'Значение не коректо')
         setMinCount(+e.currentTarget.value)
-        setCount(+e.currentTarget.value)
+        setDisable(false)
     }
     const setMax = (e: ChangeEvent<HTMLInputElement>) => {
+        setError(minCount < 0 || minCount >= maxCount ? 'Нажмите set' : 'Значение не коректо')
         setMaxCount(+e.currentTarget.value)
+        setDisable(false)
+    }
+    const setCountButton = () => {
+        setCount(minCount)
+        setDisable(true)
+        setError('')
     }
 
     return (
@@ -30,6 +40,9 @@ function App() {
                 maxCount={maxCount}
                 setMin={setMin}
                 setMax={setMax}
+                error={error}
+                setCountButton={setCountButton}
+                disable={disable}
             />
             <Count
                 error={error}
