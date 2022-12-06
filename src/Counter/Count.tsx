@@ -19,9 +19,11 @@ export const Count = ({count, minCount, maxCount, error, ...props}: CountType) =
     }
     const disableInc = count >= maxCount || !!error
     const disableRes = count === minCount || !!error
+    // error ? s.Error :s.Count
+    const countClass = s.Count + ' '+(error?s.Error:'')+ ' '+ (count===maxCount?s.CountMax:'')
     return (
         <div className={s.Container}>
-            <div className={s.Count}>
+            <div className={countClass}>
                 {error ? error : count}
             </div>
             <div className={s.Button_Container}>

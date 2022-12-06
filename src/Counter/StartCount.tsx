@@ -19,12 +19,16 @@ export const StartCount = ({disable, minCount, maxCount, error, ...props}: Start
     }
     const disableButton = maxCount <= minCount || disable
 
+    const finishInputClass = (maxCount <= minCount || minCount < 0) ? s.ErrorInput : s.InputClass
+
     return (
         <div className={s.Container}>
             <div className={s.StartValue}>
                 <div>
                     max value:
                     <input
+                        className={finishInputClass}
+                        type={"number"}
                         value={maxCount}
                         onChange={setMax}
                     />
@@ -32,6 +36,8 @@ export const StartCount = ({disable, minCount, maxCount, error, ...props}: Start
                 <div>
                     min value:
                     <input
+                        className={finishInputClass}
+                        type={"number"}
                         value={minCount}
                         onChange={setMin}
                     />
