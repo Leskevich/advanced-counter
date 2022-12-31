@@ -1,26 +1,26 @@
 import React from 'react';
-import s from './Count.module.css'
+import s from '../Count.module.css'
+import {incValue, initialStateType, resValue} from "../store/countReducer";
+import {useDispatch} from "react-redux";
 
 type CountType = {
-    error: string
-    count: number
-    minCount: number
-    maxCount: number
-    incCount: () => void
-    resCount: () => void
+    countR: initialStateType
 }
 
-export const Count = ({count, minCount, maxCount, error, ...props}: CountType) => {
+export const CountRedux = ({countR, ...props}: CountType) => {
+    const {minCount, maxCount, error, count} = countR
+    const dispatch = useDispatch()
+
     const incCount = () => {
-        props.incCount()
+        dispatch(incValue())
     }
     const resCount = () => {
-        props.resCount()
+        dispatch(resValue())
     }
     const disableInc = count >= maxCount || !!error
     const disableRes = count === minCount || !!error
 
-    const countClass = s.Count + ' '+(error?s.Error:'')+ ' '+ (count===maxCount?s.CountMax:'')
+    const countClass = s.Count + ' ' + (error ? s.Error : '')+' '+ (minCount===maxCount&&s.Error)
     return (
         <div className={s.Container}>
             <div className={countClass}>

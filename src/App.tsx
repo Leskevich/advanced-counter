@@ -13,7 +13,7 @@ function App() {
 
     useEffect(() => {
         let local = localStorage.getItem('count')
-        console.log(local)
+
         if (local) {
             let count: { min: number, max: number } = JSON.parse(local)
             setMinCount(count.min)
@@ -21,11 +21,9 @@ function App() {
             // setMaxCount(count.max)
         }
     }, [])
-
     useEffect(() => {
         localStorage.setItem('count', JSON.stringify({min: minCount, max: maxCount}))
     }, [minCount,maxCount])
-
 
     const incCount = () => {
         setCount(count + 1)
